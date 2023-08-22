@@ -1,0 +1,213 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="tr-breadcrumb bg-image section-before">
+  <div class="container">
+    <div class="breadcrumb-info text-center">
+      <div class="breadcrumb-logo">
+
+        <div class="user-image" *ngFor="let logo of img_file">
+          <img [src]="getBase64Image(logo)" alt="{{ logo.name }}" class="img-fluid" />
+
+        </div>
+
+      </div>
+      <div class="page-title">
+        <h1 *ngIf="company_data">{{company_data.company_name}}</h1>
+        <!-- <img src="{{'data:image/png;base64,'+company_image}}" alt=""> -->
+      </div>
+      <ul class="job-meta tr-list list-inline">
+        <li *ngIf="company_data">
+          <i class="fa fa-map-marker" aria-hidden="true" ></i>{{company_data.country_of_origin}}, {{company_data.state}}, {{company_data.city}}
+        </li>
+        <li *ngIf="company_data"><i class="fa fa-phone" aria-hidden="true"></i>{{company_data.phone_number}}</li>
+        <li>
+          <i class="fa fa-envelope" aria-hidden="true"></i
+          ><a href="#"
+            ><span *ngIf="company_data"
+              class="__cf_email__"
+              data-cfemail="d1a2a4a1a1bea3a591b6bebeb6bdb4ffb2bebc"
+              >[{{company_data.email_address}}]</span
+            ></a
+          >
+        </li>
+        <li *ngIf="company_specialization_data"><i class="fa fa-briefcase" aria-hidden="true"></i> Deal with [ {{company_specialization_data}} ]</li>
+        <li *ngIf="company_data">
+          <i class="fa fa-black-tie" aria-hidden="true"></i>{{company_data.company_owner}} Company
+        </li>
+      </ul>
+      <ul class="breadcrumb-social social-icon-bg tr-list">
+        <li>
+          <a href="#"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-twitter"></i> <span>Twitter</span> </a>
+        </li>
+        <li>
+          <a href="#"
+            ><i class="fa fa-google-plus"></i> <span>Google Plus</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-linkedin"></i><span>Linkedin</span> </a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-dribbble"></i> <span>Dribbble</span></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-behance"></i> <span>Behance</span></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-globe"></i> <span>Website</span> </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="tr-profile section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-3">
+        <div class="tr-sidebar">
+          <ul class="nav nav-tabs profile-tabs section" role="tablist">
+            <li role="presentation">
+              <a
+                class="active"
+                href="#account-info"
+                aria-controls="account-info"
+                role="tab"
+                data-toggle="tab"
+                ><i class="fa fa-life-ring" aria-hidden="true"></i> Account
+                Info</a
+              >
+            </li>
+            <li role="presentation">
+              <a style="cursor: pointer;"
+                (click)="gotoEditMyProfile()"
+                aria-controls="archived"
+                role="tab"
+                data-toggle="tab"
+                ><span><i class="fa fa-clone" aria-hidden="true"></i></span
+                >Modfy My Profile</a
+              >
+            </li>
+            <li role="presentation">
+              <a style="cursor: pointer;" (click)="log_out()"
+                ><span><i class="fa fa-scissors" aria-hidden="true"></i></span
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-8 col-lg-9">
+        <div class="tab-content">
+          <div
+            role="tabpanel"
+            class="tab-pane fade in show active account-info"
+            id="account-info"
+          >
+            <div class="tr-fun-fact">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="fun-fact media">
+                    <div class="fun-fact-icon">
+                      <img
+                        src="../../assets/images/icons/fun-fact4.png"
+                        alt="images"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="media-body">
+                      <h1 class="counter" *ngIf="count_my_jobs">{{count_my_jobs}}</h1>
+                      <span>Total job post</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="fun-fact media">
+                    <div class="fun-fact-icon">
+                      <img
+                        src="../../assets/images/icons/fun-fact5.png"
+                        alt="images"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="media-body">
+                      <h1 class="counter" *ngIf="count_all_application_submitted">{{count_all_application_submitted}}</h1>
+                      <span>Application submit</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="fun-fact media">
+                    <div class="fun-fact-icon">
+                      <img
+                        src="../../assets/images/icons/fun-fact6.png"
+                        alt="images"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="media-body">
+                      <h1 class="counter" *ngIf="count_all_success_application_submitted">{{count_all_success_application_submitted}}</h1>
+                      <span>Call for interview</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="section resume-last-updated">
+              <span class="icon pull-left"
+                ><img src="../../assets/images/icons/1.png" alt="Icon" class="img-fluid"
+              /></span>
+              <div class="updated-info">
+                <span class="pull-left">Establishment Date</span>
+                <span class="pull-right">{{company_data.establishment_date  }}</span>
+              </div>
+            </div>
+            <div class="section display-information">
+              <div class="title title-after">
+                <div class="icon">
+                  <img src="../../assets/images/icons/2.png" alt="Icon" class="img-fluid" />
+                </div>
+                <span>Your display information</span>
+              </div>
+              <div class="change-photo">
+                <div class="user-image" *ngFor="let logo of img_file">
+                  <img [src]="getBase64Image(logo)" alt="{{ logo.name }}" class="img-fluid" />
+
+                </div>
+                <div class="upload-photo">
+                  <label class="btn btn-primary" for="upload-photo">
+                    <input type="file" id="upload-photo" />
+                    Change Photo
+                  </label>
+                  <span class="max-size">Max 20 MB</span>
+                </div>
+              </div>
+              <ul class="tr-list account-details">
+                <li>Compnay Name<span>{{company_data.company_name}}</span></li>
+                <li>Address<span>{{company_data.country_of_origin}}, {{company_data.state}}, {{company_data.city}}</span></li>
+                <li>Phone Number<span>{{company_data.phone_number}}</span></li>
+                <li>
+                  Email Id<span
+                    ><a href="#"
+                      ><span
+                        class="__cf_email__"
+                        data-cfemail="88e2e0e7e6ece7edc8efe5e9e1e4a6ebe7e5"
+                        >[{{company_data.email_address}}]</span
+                      ></a
+                    ></span
+                  >
+                </li>
+                <li>Industry Expertise<span> [ {{company_specialization_data}} ]</span></li>
+                <li>Compnay Mailing Address<span>{{company_data.company_mailing_address
+                }}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,57 @@
+<!-- navbar -->
+<app-nav-bar></app-nav-bar>
+<!-- nav_bar -->
+
+<div class="tr-breadcrumb bg-image section-before">
+  <div class="container">
+    <div class="breadcrumb-info text-center">
+      <div class="page-title">
+        <h1>Sign In</h1>
+        <span>Please Sign In Here To Access Content</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tr-account section-padding">
+  <div class="container text-center">
+    <div class="user-account">
+      <div class="account-content">
+        <form (ngSubmit)="processLogin()" class="tr-form">
+          <div class="form-group">
+            <input
+              type="email" name="username"
+              class="form-control" [(ngModel)]="login_model.username"
+              placeholder="Please Enter Your Email"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password" name="password"
+              class="form-control" [(ngModel)]="login_model.password"
+              placeholder="Password"
+            />
+          </div>
+          <div class="user-option">
+            <div class="checkbox">
+              <label for="logged"
+                ><input type="checkbox" name="logged" id="logged" />Remember
+                me</label
+              >
+            </div>
+            <div class="forgot-password">
+              <a href="#">I forgot password</a>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!login_model.username || !login_model.password">Login</button>
+        </form>
+        <div class="new-user text-center">
+          <span><a routerLink="../../job_portal/registration">Create a New Account</a> </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<app-footer></app-footer>
+<!-- footer -->

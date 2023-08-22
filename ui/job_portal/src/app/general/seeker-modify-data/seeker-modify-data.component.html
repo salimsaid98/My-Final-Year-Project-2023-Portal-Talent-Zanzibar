@@ -1,0 +1,312 @@
+<!-- navbar -->
+<app-nav-bar></app-nav-bar>
+<!-- nav_bar -->
+
+<div class="tr-breadcrumb bg-image section-before" *ngIf="user_info_data">
+  <div class="container">
+    <div class="breadcrumb-info text-center">
+      <div class="user-image">
+        <img
+          src="assets/images/others/author.png"
+          alt="Image"
+          class="img-fluid"
+        />
+      </div>
+      <div class="user-title">
+        <h1>{{user_info_data.first_name}} {{user_info_data.last_name}}</h1>
+      </div>
+      <ul class="job-meta tr-list list-inline">
+        <li>
+          <i class="fa fa-map-marker" aria-hidden="true"></i>{{user_info_data.country_of_origin}}, {{user_info_data.address}}
+        </li>
+        <li><i class="fa fa-phone" aria-hidden="true"></i>{{user_info_data.contact}}</li>
+        <li>
+          <i class="fa fa-envelope" aria-hidden="true"></i
+          ><a href="#"
+            ><span
+              class="__cf_email__"
+              data-cfemail="0f656760616b606a4f68626e6663216c6062"
+              >[{{user_info_data.email}}]</span
+            ></a
+          >
+        </li>
+        <li>
+          <i class="fa fa-briefcase" aria-hidden="true"></i>{{user_info_data.specialization}}
+        </li>
+      </ul>
+      <ul class="breadcrumb-social social-icon-bg tr-list">
+        <li>
+          <a href="#"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-twitter"></i> <span>Twitter</span> </a>
+        </li>
+        <li>
+          <a href="#"
+            ><i class="fa fa-google-plus"></i> <span>Google Plus</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-linkedin"></i><span>Linkedin</span> </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="tr-profile section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-3">
+        <div class="tr-sidebar">
+          <ul class="nav nav-tabs profile-tabs section" role="tablist">
+            <li role="presentation">
+              <a style="cursor: pointer;"
+                (click)="goToMyInformation()"
+                aria-controls="account-info"
+                role="tab"
+                data-toggle="tab"
+                ><i class="fa fa-life-ring" aria-hidden="true"></i> My
+                Information</a
+              >
+            </li>
+            <li role="presentation">
+              <a (click)="gotToAddMoreEducationDetails()"
+                style="cursor: pointer;"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Add Education Details</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a
+                routerLink="../../job_portal/applicant_education_details"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Education Details</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a style="cursor: pointer;" (click)="goToModifyMyInformation()"  class="active"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Modify My  Details</a
+              >
+            </li>
+            <li role="presentation">
+              <a style="cursor: pointer;"
+              (click)="openDialog()"
+                aria-controls="archived"
+                role="tab"
+                data-toggle="tab"
+                ><span><i class="fa fa-clone" aria-hidden="true"></i></span>
+                Applied Jobs</a
+              >
+            </li>
+            <li role="presentation">
+              <a (click)="log_out()" style="cursor: pointer;"
+                aria-controls="close-account"
+                role="tab"
+                data-toggle="tab"
+                ><span><i class="fa fa-scissors" aria-hidden="true"></i></span>
+                Log Out</a
+              >
+            </li>
+          </ul>
+          <a href="#" class="btn btn-primary"
+            ><i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span>Download Resume as doc</span></a
+          >
+        </div>
+      </div>
+      <div class="col-md-8 col-lg-9">
+        <div class="tab-content">
+          <div
+            role="tabpanel"
+            class="tab-pane fade in show active account-info"
+            id="account-info"
+          >
+
+            <div class="section display-information">
+              <div class="title title-after">
+                <div class="icon">
+                  <img src="../../assets/images/icons/2.png" alt="Icon" class="img-fluid" />
+                </div>
+                <span>Modify Seeker Information</span>
+              </div>
+
+              <form (ngSubmit)="modifySeeker()" class="tr-form">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="">First Name</label>
+                          <input type="text" class="form-control" placeholder="First Name" name="first_name" [(ngModel)]="seeker_model.first_name">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="">Middle Name</label>
+                        <input type="text" class="form-control" placeholder="Middle Name" name="middle_name" [(ngModel)]="seeker_model.middle_name">
+                      </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="">Last Name</label>
+                      <input type="text" class="form-control" placeholder="Last Name" name="last_name" [(ngModel)]="seeker_model.last_name">
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Phone Number</label>
+                    <input type="text" class="form-control" placeholder="Phone Number" name="contact"  [(ngModel)]="seeker_model.contact">
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="">Date of Birth</label>
+                  <input type="date" class="form-control" placeholder="Date of Birth" name="date_of_birth"  [(ngModel)]="seeker_model.date_of_birth">
+                </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="">Gender</label>
+                <select class="form-control" name="gender"  [(ngModel)]="seeker_model.gender">
+                  <option selected>Choose Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">Address</label>
+              <input type="text" class="form-control" placeholder="Address" name="address"  [(ngModel)]="seeker_model.address">
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">Country of Origin</label>
+              <select name="" id="" class="form-control" name="country_of_origin"  [(ngModel)]="seeker_model.country_of_origin">
+                <option disabled>Choose Country</option>
+                  <option *ngFor="let c of countries" [value]="c.name">{{c.name}}</option>
+              </select>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="">Specialization</label>
+            <input type="text" class="form-control" placeholder="Specialization" name="specialization"  [(ngModel)]="seeker_model.specialization">
+          </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="">Email Address</label>
+          <input type="text" class="form-control" placeholder="email_address" name="email_address"  [(ngModel)]="seeker_model.email">
+        </div>
+    </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Save </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #callDialog>
+  <h2 mat-dialog-title>All Jobs That I Applied</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Job Applied Information</h3>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="name_seeker">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.first_name + ' ' + element.middle_name + ' ' + element.last_name }}
+                     </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="company">
+                    <th mat-header-cell *matHeaderCellDef>Company </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span *ngFor="let c of company_data">
+                        <span *ngIf="element.company_id == c.company_id">
+                          {{c.company_name}}
+                        </span>
+                      </span>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="specialization">
+                      <th mat-header-cell *matHeaderCellDef> Specilization </th>
+                      <td mat-cell *matCellDef="let element"> {{element.specialization}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="gender">
+                      <th mat-header-cell *matHeaderCellDef> Gender </th>
+                      <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="applied_date">
+                      <th mat-header-cell *matHeaderCellDef> Applied Date </th>
+                      <td mat-cell *matCellDef="let element">
+                        {{element.applied_date}}
+                       </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef> Application Status </th>
+                      <td mat-cell *matCellDef="let element">
+                        <span class="badge badge-warning" *ngIf="element.status == 0">Pending Approval</span>
+                        <span class="badge badge-danger" *ngIf="element.status == 2">Not Approved</span>
+                        <span class="badge badge-success" *ngIf="element.status == 1">Approved Applicant</span>
+                       </td>
+                    </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5,10,15,20,25,50]"
+                               showFirstLastButtons
+                               aria-label="Select page of periodic elements">
+                </mat-paginator>
+              </div>
+            </div>
+          </div>
+</mat-dialog-content>
+</ng-template>
+
+<!-- footer -->
+<app-footer></app-footer>
+<!-- footer -->

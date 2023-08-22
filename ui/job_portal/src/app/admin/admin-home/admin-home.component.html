@@ -1,0 +1,257 @@
+<!-- navbar -->
+<app-nav-bar></app-nav-bar>
+<!-- nav_bar -->
+
+
+
+<div class="tr-profile section-padding">
+  <div class="" style="margin-left:5%;margin-right:4%;">
+    <div class="row">
+        <div class="col-md-4">
+            <h1 *ngIf="user_role">{{user_role}}</h1>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-lg-3">
+        <div class="tr-sidebar">
+          <ul class="nav nav-tabs profile-tabs section" role="tablist">
+            <li role="presentation">
+              <a style="cursor: pointer;"
+                    (click)="gotoAdminHomePage()"
+                class="active"
+                aria-controls="account-info"
+                role="tab"
+                data-toggle="tab"
+                ><i class="fa fa-life-ring" aria-hidden="true"></i> Home Page</a
+              >
+            </li>
+            <li role="presentation">
+              <a (click)="goToSpecializationPage()"
+                style="cursor: pointer;"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Specialization Configurations</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a (click)="goToSkillsPage()"
+                style="cursor: pointer;"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Skills Configurations</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a (click)="goToJobTypes()"
+              style="cursor: pointer;"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Job Type Configurations</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a (click)="goToCompanies()"
+              style="cursor: pointer;"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Companies</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a (click)="gotoSeekers()"
+              style="cursor: pointer;"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Seekers</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a (click)="gotoJobList()"
+              style="cursor: pointer;"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Job List</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a style="cursor: pointer;"
+                (click)="goToUserManagement()"
+                aria-controls="archived"
+                role="tab"
+                data-toggle="tab"
+                ><span><i class="fa fa-clone" aria-hidden="true"></i></span>
+                User Management</a
+              >
+            </li>
+            <li role="presentation">
+              <a (click)="log_out()" style="cursor: pointer;"
+                aria-controls="close-account"
+                role="tab"
+                data-toggle="tab"
+                ><span><i class="fa fa-scissors" aria-hidden="true"></i></span>
+                Log Out</a
+              >
+            </li>
+          </ul>
+          >
+        </div>
+      </div>
+      <div class="col-md-8 col-lg-9">
+        <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+        <div class="tab-content">
+          <div
+            role="tabpanel"
+            class="tab-pane fade in show active account-info"
+            id="account-info"
+          >
+            <div class="tr-fun-fact">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="fun-fact">
+                    <div class="fun-fact-icon">
+                      <img
+                        src="../../assets/images/icons/fun-fact4.png"
+                        alt="images"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="media-body">
+                      <h1 class="counter">{{companies}}</h1>
+                      <span>Total Companies</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="fun-fact">
+                    <div class="fun-fact-icon">
+                      <img
+                        src="../../assets/images/icons/fun-fact5.png"
+                        alt="images"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="media-body">
+                      <h1 class="counter">{{jobs}}</h1>
+                      <span>Total Job Posted</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="fun-fact">
+                    <div class="fun-fact-icon">
+                      <img
+                        src="../../assets/images/icons/fun-fact6.png"
+                        alt="images"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="media-body">
+                      <h1 class="counter">{{seekers}}</h1>
+                      <span>Seekers</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="fun-fact">
+                    <div class="fun-fact-icon">
+                      <img
+                        src="../../assets/images/icons/fun-fact4.png"
+                        alt="images"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="media-body">
+                      <h1 class="counter">{{users}}</h1>
+                      <span>Total Users</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="fun-fact">
+                    <div class="fun-fact-icon">
+                      <img
+                        src="../../assets/images/icons/fun-fact5.png"
+                        alt="images"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="media-body">
+                      <h1 class="counter">{{skills}}</h1>
+                      <span>Total Skills</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="fun-fact">
+                    <div class="fun-fact-icon">
+                      <img
+                        src="../../assets/images/icons/fun-fact6.png"
+                        alt="images"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="media-body">
+                      <h1 class="counter">{{specialization}}</h1>
+                      <span>Total Specializations</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="fun-fact">
+                      <div class="fun-fact-icon">
+                        <img
+                          src="../../assets/images/icons/fun-fact6.png"
+                          alt="images"
+                          class="img-fluid"
+                        />
+                      </div>
+                      <div class="media-body">
+                        <h1 class="counter">{{job_type}}</h1>
+                        <span>Total Job Types</span>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<app-footer></app-footer>
+<!-- footer -->

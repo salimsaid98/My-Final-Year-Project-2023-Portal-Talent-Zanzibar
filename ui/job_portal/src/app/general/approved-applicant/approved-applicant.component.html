@@ -1,0 +1,102 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="tr-breadcrumb bg-image section-before" *ngIf="job_data">
+  <div class="container">
+    <div class="breadcrumb-info text-center">
+      <div class="breadcrumb-logo">
+        <img
+          src="../../../assets/images/others/company-logo.png"
+          alt="Logo"
+          class="img-fluid"
+        />
+      </div>
+      <div class="page-title">
+        <h1>{{ job_data.job_tittle }} @ {{ job_data.company_name }}</h1>
+      </div>
+      <ul class="tr-list job-meta list-inline">
+        <li>
+          <i class="fa fa-map-signs" aria-hidden="true"></i>
+          {{ job_data.country }} , {{ job_data.state }} ,{{ job_data.city }}
+        </li>
+        <li>
+          <i class="fa fa-map-marker" aria-hidden="true"></i
+          >{{ job_data.job_category }}
+        </li>
+        <li>
+          <i class="fa fa-money" aria-hidden="true"></i
+          >{{ job_data.salary_information }}
+        </li>
+        <li>
+          <i class="fa fa-tags" aria-hidden="true"></i>{{ job_data.job_type }}
+        </li>
+        <li>
+          <i class="fa fa-hourglass-start" aria-hidden="true"></i>Application
+          Deadline : {{ job_data.end_date }}
+        </li>
+      </ul>
+      <div class="buttons" *ngIf="user_role == 'Seeker'">
+        <a href="#" class="btn btn-primary"
+          ><i class="fa fa-briefcase" aria-hidden="true"></i>Apply For This
+          Job</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="job-details section-padding">
+  <div class="container">
+    <div class="tr-job-posted similar-jobs">
+      <span class="tr-title">People Who Have Been Approved To This Post</span>
+      <div class="row">
+        <div class="col-md-12">
+          <table id="myTable" class="display" style="width:100%">
+            <thead>
+              <tr>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let success of success_applicant">
+                <td>
+                  <div role="tabpanel" class="tab-pane apply-job" id="archived">
+                    <div class="job-item">
+                      <div class="job-info">
+                        <div class="left-content">
+                          <div class="clearfix">
+                            <div class="company-logo">
+                              <img src="../../../../assets/images/user.jpg" alt="images" class="img-fluid" style="height: 100px; margin-top: -20%;">
+                            </div>
+                            <span class="tr-title">
+                              <a style="cursor: pointer;">{{success.first_name + " " + success.middle_name + " " + success.last_name}}</a
+                              ><span><a>{{success.gender}}</a></span>
+                            </span>
+                            <span><a class="btn btn-primary">Specialized in {{success.specialization}}</a></span>
+                          </div>
+                          <ul class="tr-list job-meta">
+                            <li>
+                              <span><i class="fa fa-map-signs" aria-hidden="true"></i></span>
+                              {{success.country_of_origin}}
+                            </li>
+                            <li>
+                              <span><i class="fa fa-briefcase" aria-hidden="true"></i></span>
+                              Applied at : {{success.applied_date}}
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="right-content">
+                          <a (click)="gotToConfirmedInformation(success)" class="btn button-cancle">View Applicant information</a>
+                          <span class="applied">Confirmed: </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

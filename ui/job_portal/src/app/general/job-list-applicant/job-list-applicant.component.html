@@ -1,0 +1,170 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="tr-banner section-before bg-image">
+  <div class="container">
+    <div class="banner-content text-center">
+      <h1>The Easiest Way to Get Your New Job</h1>
+      <h2>We offer 12000 jobs vacation right now</h2>
+      <div class="banner-form">
+        <form action="#">
+          <input type="text" class="form-control" placeholder="Job Keyword" />
+          <button type="submit" class="btn btn-primary" value="Search">
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tr-category section-padding">
+  <div class="container">
+    <div class="section-title">
+      <h1>Browse Jobs By Category</h1>
+    </div>
+    <ul class="category-list tr-list">
+      <li *ngFor="let jc of job_type">
+        <a href="#">
+          <span class="icon">
+            <img
+              src="../../../assets/images/icons/category1.png"
+              alt="Icon"
+              class="img-fluid"
+            />
+          </span>
+          <span class="category-title">{{jc.job_type}}</span>
+          <span class="category-quantity"> ({{jc.number_of_post}})</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="tr-cta">
+  <div class="container">
+    <div class="cta-content section">
+      <div class="cta-info">
+        <div class="pull-left">
+          <h1>Add your resume and let your next job find you.</h1>
+        </div>
+        <a href="#" class="btn btn-primary pull-right">Add Your Resume</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tr-job-posted section-padding">
+  <div class="container">
+    <div class="section-title">
+      <h1>Jobs you may be interested in</h1>
+    </div>
+    <div class="job-tab text-center">
+      <ul class="nav nav-tabs justify-content-center" role="tablist">
+        <li role="presentation" class="active">
+          <a
+            class="active"
+            href="#hot-jobs"
+            aria-controls="hot-jobs"
+            role="tab"
+            data-toggle="tab"
+            >Hot Jobs</a
+          >
+        </li>
+        <li role="presentation">
+          <a
+            href="#recent-jobs"
+            aria-controls="recent-jobs"
+            role="tab"
+            data-toggle="tab"
+            >Recent Jobs</a
+          >
+        </li>
+        <li role="presentation">
+          <a
+            href="#popular-jobs"
+            aria-controls="popular-jobs"
+            role="tab"
+            data-toggle="tab"
+            >Popular Jobs</a
+          >
+        </li>
+      </ul>
+      <div class="tab-content text-left">
+        <div role="tabpanel" class="tab-pane fade show active" id="hot-jobs">
+          <div class="row">
+            <div class="col-md-6 col-lg-3" *ngFor="let j of jobs">
+              <div class="job-item">
+                <div class="item-overlay">
+                  <div class="job-info">
+                    <a class="btn btn-primary">{{j.job_category}}</a>
+                    <span class="tr-title">
+                      <a>{{j.job_tittle}}r</a>
+                      <span><a>{{j.job_tittle}}</a></span>
+                    </span>
+                    <ul class="tr-list job-meta">
+                      <li>
+                        <i class="fa fa-map-signs" aria-hidden="true"></i>
+                        {{j.country}}, {{j.state}}
+                      </li>
+                      <li>
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>{{j.experience_level}}
+                      </li>
+                      <li>
+                        <i class="fa fa-money" aria-hidden="true"></i>{{j.salary_information}}
+                      </li>
+                      <li>
+                        <span><i class="fa fa-calendar" aria-hidden="true"></i></span
+                        >Deadline : {{j.end_date}}
+                      </li>
+                    </ul>
+                    <ul class="job-social tr-list">
+                      <li>
+                        <a (click)="goToDetails(j.job_post_id)"
+                          ><i
+                            class="fa fa-long-arrow-right"
+                            aria-hidden="true"
+                          ></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="job-info">
+                  <div class="company-logo">
+                    <img src="../../../assets/images/job/1.png" alt="images" class="img-fluid" />
+                  </div>
+                  <span class="tr-title">
+                    <a>{{j.job_tittle}}</a>
+                    <span><a>{{j.job_type}}</a></span>
+                  </span>
+                  <ul class="tr-list job-meta">
+                    <li>
+                      <span
+                        ><i class="fa fa-map-signs" aria-hidden="true"></i></span
+                      >{{j.country}}, {{j.state}}, {{j.city}}
+                    </li>
+                    <li>
+                      <span
+                        ><i class="fa fa-briefcase" aria-hidden="true"></i></span
+                      >{{j.experience_level}}
+                    </li>
+                    <li>
+                      <span><i class="fa fa-money" aria-hidden="true"></i></span
+                      >{{j.salary_information}}
+                    </li>
+                    <li>
+                      <span><i class="fa fa-calendar" aria-hidden="true"></i></span
+                      >Deadline : {{j.end_date}}
+                    </li>
+                  </ul>
+                  <div class="time">
+                    <a><span>{{j.job_category}}</span></a>
+                    <span class="pull-right">{{j.required_people}}  Posts</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

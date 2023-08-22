@@ -1,0 +1,277 @@
+<!-- navbar -->
+<app-nav-bar></app-nav-bar>
+<!-- nav_bar -->
+<div class="tr-breadcrumb bg-image section-before">
+  <div class="container">
+    <div class="breadcrumb-info text-center">
+      <div class="page-title">
+        <h1>Post Your Job</h1>
+      </div>
+      <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">Job Post</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<form (ngSubmit)="saveJobPost()">
+<div class="tr-post-job page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="short-info code-edit-small">
+          <div class="section">
+            <span class="tr-title">Short Informations</span>
+            <div class="row">
+              <div class="col-sm-3">
+                <label>Title for your job</label>
+              </div>
+              <div class="col-sm-9">
+                <div class="code-edit">
+                  <input type="text" class="form-control" name="job_tittle" [(ngModel)]="job_post.job_tittle">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">
+                <label>Job Type</label>
+              </div>
+              <div class="col-sm-9">
+                <div class="form-group">
+                  <select name="job_type_id" class="form-control" [(ngModel)]="job_post.job_type_id">
+                    <option *ngFor="let t of job_type_data" [value]="t.job_type_id">{{t.job_type}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row job-category">
+              <div class="col-sm-3">
+                <label>Job Category</label>
+              </div>
+              <div class="col-sm-9">
+                <div class="job-type">
+                  <input
+                    type="radio" [(ngModel)]="job_post.job_category"
+                    name="job_category"
+                    value="full-time"
+                    id="full-time"
+                  />
+                  <label for="full-time">Full Time</label>
+                  <input
+                    type="radio" [(ngModel)]="job_post.job_category"
+                    name="job_category"
+                    value="part-time"
+                    id="part-time"
+                  />
+                  <label for="part-time">Part Time</label>
+                  <input
+                    type="radio" [(ngModel)]="job_post.job_category"
+                    name="job_category"
+                    value="freelance"
+                    id="freelance"
+                  />
+                  <label for="freelance">Freelance</label>
+                  <input
+                    type="radio" [(ngModel)]="job_post.job_category"
+                    name="job_category"
+                    value="contract"
+                    id="contract"
+                  />
+                  <label for="contract">Contract</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">
+                <label>Job Location</label>
+              </div>
+              <div class="col-sm-9">
+                <div class="code-edit">
+                  <span>Choose Job Location</span>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <select name="countries" id="" class="form-control" [(ngModel)]="job_location.country">
+                      <option *ngFor="let c of countries" [value]="c.name">{{c.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                      <input type="text" class="form-control" placeholder="State" name="state" [(ngModel)]="job_location.state">
+                  </div>
+
+                  <div class="col-sm-3">
+                      <input type="text" class="form-control" placeholder="City" name="city" [(ngModel)]="job_location.city">
+                  </div>
+
+                  <div class="col-sm-3">
+                      <input type="text" class="form-control" placeholder="Street" name="street" [(ngModel)]="job_location.street">
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">
+                <label>Salary Information</label>
+              </div>
+              <div class="col-sm-9">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="code-edit">
+                      <span><input type="text" class="form-control" placeholder="Ex 500000 tzs" name="salary_information" [(ngModel)]="job_post.salary_information"></span>
+                      <!--  -->
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="aegotiable">
+                      <span>Or</span>
+                      <input
+                        type="radio" [(ngModel)]="job_post.salary_information"
+                        name="salary_information"
+                        value="aegotiable"
+                        id="aegotiable"
+                      />
+                      <label for="aegotiable">Negotiable</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">
+                <label>Application Deadline</label>
+              </div>
+              <div class="col-sm-9">
+                <div class="calendar">
+                  <input type="date" class="form-control" name="end_date" [(ngModel)]="job_post.end_date">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-3">
+                <label>Number of Candidates</label>
+              </div>
+              <div class="col-sm-9">
+                <div class="calendar">
+                  <input type="number" class="form-control" name="required_people" [(ngModel)]="job_post.required_people">
+                </div>
+              </div>
+            </div>
+
+            <div class="row exprience-level">
+              <div class="col-sm-3">
+                <label>Exprience Level</label>
+              </div>
+              <div class="col-sm-9">
+                <div class="exprience">
+                  <input [(ngModel)]="job_post.experience_level"
+                    type="radio"
+                    name="experience_level"
+                    value="entry-level"
+                    id="entry-level"
+                  />
+                  <label for="entry-level">Entry Level</label>
+                  <input
+                    type="radio" [(ngModel)]="job_post.experience_level"
+                    name="experience_level"
+                    value="mid-level"
+                    id="mid-level"
+                  />
+                  <label for="mid-level">Mid Level</label>
+                  <input
+                    type="radio" [(ngModel)]="job_post.experience_level"
+                    name="experience_level"
+                    value="mid-senior"
+                    id="mid-senior"
+                  />
+                  <label for="mid-senior">Mid-Senior Level</label>
+                  <input
+                    type="radio" [(ngModel)]="job_post.experience_level"
+                    name="experience_level"
+                    value="top-level"
+                    id="top-level"
+                  />
+                  <label for="top-level">Top Level</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">
+                <label>Job Skills</label>
+              </div>
+              <div class="col-sm-9">
+                <select name="job_skills" id="" class="form-control" multiple [(ngModel)]="job_skills.skill_id">
+                  <option *ngFor="let s of skill_data" [value]="s.skill_id">{{s.skill_name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="job-description section">
+          <span class="tr-title">Job Description</span>
+          <div class="row">
+            <div class="col-sm-3">
+              <label>Job Summary</label>
+            </div>
+            <div class="col-sm-9">
+              <div class="code-edit">
+                <span>Write few lines about your Job</span>
+              </div>
+              <span class="characters-left">
+                <textarea name="job_description" class="form-control" [(ngModel)]="job_post.job_description"></textarea>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <label>Key Responsibilities:</label>
+            </div>
+            <div class="col-sm-9">
+              <div class="code-edit">
+                <span>Write few lines about your Job</span>
+              </div>
+              <span class="characters-left">
+                <textarea name="key_responsibilities" class="form-control" [(ngModel)]="job_post.key_responsibilities"></textarea>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <label>Minimum Requirements:</label>
+            </div>
+            <div class="col-sm-9">
+              <div class="code-edit">
+                <span>Write few lines about your Job</span>
+              </div>
+              <span class="characters-left">
+                <textarea name="minimum_requirement" class="form-control" [(ngModel)]="job_post.minimum_requirement"></textarea>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="section agreement">
+          <label for="send">
+            <input type="checkbox" class="form-control" checked>
+            You agree to our <a>Terms of Use</a> and
+            <a>Privacy Policy</a> and acknowledge that you are the
+            rightful owner of this item and using Trade to find a genuine buyer.
+          </label>
+          <div class="buttons">
+            <button class="btn btn-primary"
+             [disabled]="!job_post.minimum_requirement || !job_post.key_responsibilities || !job_post.job_description || !job_skills.skill_id || !job_post.experience_level
+             || !job_post.required_people || !job_post.end_date || !job_post.salary_information || !job_location.street || !job_location.city || !job_location.country
+             || !job_post.job_category || !job_post.job_type_id || !job_post.job_tittle || !job_post.job_tittle">
+             Post Your Job
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+<!-- footer -->
+<app-footer></app-footer>
+<!-- footer -->

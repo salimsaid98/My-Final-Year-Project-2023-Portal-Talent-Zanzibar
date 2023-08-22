@@ -1,0 +1,150 @@
+<!-- navbar -->
+<app-nav-bar></app-nav-bar>
+<!-- nav_bar -->
+
+<div class="tr-breadcrumb bg-image section-before">
+  <div class="container">
+    <div class="breadcrumb-info text-center">
+      <div class="page-title">
+        <h1>Create a New Account</h1>
+        <span>Create Account as Job Seeker(Employee) OR Company Job Poster(Employer)</span>
+      </div>
+    </div>
+  </div>
+</div>
+<mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<div class="tr-account section-padding">
+  <div class="container text-center">
+    <div class=" container text-center">
+      <!-- user-account -->
+      <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li>
+          <a class="active" style="cursor: pointer;">Job Seeker</a>
+        </li>
+        <li>
+          <a style="cursor: pointer;" routerLink="../../job_portal/company_registration">Company</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="seeker">
+          <div class="account-content">
+            <form (ngSubmit)="saveSeeker()" class="tr-form">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">First Name</label>
+                    <input type="text" class="form-control" placeholder="First Name" name="first_name"
+                      [(ngModel)]="seeker_model.first_name">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Middle Name</label>
+                    <input type="text" class="form-control" placeholder="Middle Name" name="middle_name"
+                      [(ngModel)]="seeker_model.middle_name">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Last Name</label>
+                    <input type="text" class="form-control" placeholder="Last Name" name="last_name"
+                      [(ngModel)]="seeker_model.last_name">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Phone Number</label>
+                    <input type="text" class="form-control" placeholder="Phone Number" name="contact"
+                      [(ngModel)]="seeker_model.contact">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Date of Birth</label>
+                    <input type="date" class="form-control" placeholder="Date of Birth" name="date_of_birth"
+                      [(ngModel)]="seeker_model.date_of_birth">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Gender</label>
+                    <select class="form-control" name="gender" [(ngModel)]="seeker_model.gender">
+                      <option selected>Choose Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Address</label>
+                    <input type="text" class="form-control" placeholder="Address" name="address"
+                      [(ngModel)]="seeker_model.address">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Country of Origin</label>
+                    <select name="" id="" class="form-control" name="country_of_origin"
+                      [(ngModel)]="seeker_model.country_of_origin">
+                      <option disabled>Choose Country</option>
+                      <option *ngFor="let c of countries" [value]="c.name">{{c.name}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Specialization</label>
+                    <input type="text" class="form-control" placeholder="Specialization" name="specialization"
+                      [(ngModel)]="seeker_model.specialization">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="">User Logo</label>
+                    <input type="file" class="form-control" (change)="onImageUpload($event)" name="user_image">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" placeholder="Email" name="email"
+                      [(ngModel)]="seeker_model.email">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" placeholder="Password" name="password"
+                      [(ngModel)]="login_model.password">
+                  </div>
+                </div>
+
+              </div>
+              <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+            <div class="new-user text-center">
+              <span>Already Registered? <a routerLink="../../job_portal/login_page">Sign in</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<app-footer></app-footer>
+<!-- footer -->

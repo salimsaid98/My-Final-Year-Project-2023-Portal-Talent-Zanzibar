@@ -1,0 +1,264 @@
+<!-- navbar -->
+<app-nav-bar></app-nav-bar>
+<!-- nav_bar -->
+
+<div class="tr-breadcrumb bg-image section-before">
+  <div class="container">
+    <div class="breadcrumb-info text-center">
+      <div class="page-title" *ngIf="company_name">
+        <h1>{{company_name}}</h1>
+      </div>
+      <div class="page-title" *ngIf="display_result">
+        <h1> Search result for Keyword "  {{search_result}}  "</h1>
+      </div>
+      <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">My Jobs Posts</li>
+      </ol>
+      <div class="banner-form">
+        <form>
+          <input type="text" #search class="form-control" placeholder="Job Keyword" />
+          <button type="submit" class="btn btn-primary" (click)="searchJob(search.value)" value="Search">
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<div class="jobs-listing section-padding">
+  <div class="container">
+    <div class="job-topbar">
+      <span class="pull-left">Filter jobs by</span>
+      <ul class="nav nav-tabs job-tabs" role="tablist">
+        <li *ngIf="check_role == 'Company'"> {{count_my_jobs}} Total jobs</li>
+        <li *ngIf="check_role == 'Seeker'"> {{count_my_jobs_2}} Total jobs</li>
+        <li role="presentation" class="active">
+          <a
+            href="#four-colum"
+            aria-controls="four-colum"
+            role="tab"
+            data-toggle="tab"
+            ><i class="fa fa-th" aria-hidden="true"></i
+          ></a>
+        </li>
+      </ul>
+    </div>
+    <div class="list-menu text-center clearfix" *ngIf="check_role == 'Company'">
+      <ul class="tr-list">
+        <div class="row">
+          <div class="col-md-4">
+            <select name="category" id="" class="form-control">
+              <option>Choose Category</option>
+              <option value="full-time">full-time</option>
+              <option value="part-time">part-time</option>
+              <option value="freelance">freelance</option>
+              <option value="contract">contract</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <select name="ob_type" id="" class="form-control">
+              <option>Choose Job Type</option>
+              <option *ngFor="let cat of job_type_data" [value]="cat.job_type_id">{{cat.job_type}}</option>
+            </select>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="list-menu text-center clearfix" *ngIf="check_role == 'Seeker'">
+      <ul class="tr-list">
+        <div class="row">
+          <div class="col-md-3">
+            <select name="company" #company_id class="form-control" (change)="getJobsByCompany(company_id.value)">
+              <option disabled selected>Choose Company</option>
+              <option *ngFor="let c of company_data" [value]="c.company_id">{{c.company_name}}</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select name="experience" #experience (change)="getJobsByExperienceAndCompany(experience.value)" class="form-control">
+              <option>Experience Level</option>
+              <option value="entry-level">entry-level</option>
+              <option value="mid-level">mid-level</option>
+              <option value="mid-senior">mid-senior</option>
+              <option value="top-level">top-level</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select name="category" #category_id id="" (change)="getJobsByExperienceAndCompanyAndCategory(category_id.value)" class="form-control">
+              <option>Choose Category</option>
+              <option value="full-time">full-time</option>
+              <option value="part-time">part-time</option>
+              <option value="freelance">freelance</option>
+              <option value="contract">contract</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select name="ob_type" id="" #type_id (change)="getJobsByExperienceAndCompanyAndCategoryAndType(type_id.value)" class="form-control">
+              <option>Choose Job Type</option>
+              <option *ngFor="let cat of job_type_data" [value]="cat.job_type_id">{{cat.job_type}}</option>
+            </select>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="tab-content tr-job-posted">
+      <div role="tabpanel" class="tab-pane fade show active" id="four-colum">
+
+
+        <div class="row" *ngIf="check_role == 'Company'">
+          <div class="col-md-6 col-lg-3" *ngFor="let j of jobs">
+            <div class="job-item">
+              <div class="item-overlay">
+                <div class="job-info">
+                  <a style="cursor: pointer;" class="btn btn-primary">{{j.job_category}}</a>
+                  <span class="tr-title">
+                    <a>{{j.job_tittle}}r</a>
+                    <span><a>{{j.job_tittle}}</a></span>
+                  </span>
+                  <ul class="tr-list job-meta">
+                    <li>
+                      <i class="fa fa-map-signs" aria-hidden="true"></i>
+                      {{j.country}}, {{j.state}}
+                    </li>
+                    <li>
+                      <i class="fa fa-briefcase" aria-hidden="true"></i>{{j.experience_level}}
+                    </li>
+                    <li>
+                      <i class="fa fa-money" aria-hidden="true"></i>{{j.salary_information}}
+                    </li>
+                    <li>
+                      <span><i class="fa fa-calendar" aria-hidden="true"></i></span
+                      >Deadline : {{j.end_date}}
+                    </li>
+                  </ul>
+                  <ul class="job-social tr-list">
+                    <li>
+                      <a style="cursor: pointer;" (click)="goToDetails(j.job_post_id)"
+                        ><i
+                          class="fa fa-long-arrow-right"
+                          aria-hidden="true"
+                        ></i
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="job-info">
+                <div class="company-logo">
+                  <img src="../../../assets/images/job/1.png" alt="images" class="img-fluid" />
+                </div>
+                <span class="tr-title">
+                  <a>{{j.job_tittle}}</a>
+                  <span><a>{{j.job_type}}</a></span>
+                </span>
+                <ul class="tr-list job-meta">
+                  <li>
+                    <span
+                      ><i class="fa fa-map-signs" aria-hidden="true"></i></span
+                    >{{j.country}}, {{j.state}}, {{j.city}}
+                  </li>
+                  <li>
+                    <span
+                      ><i class="fa fa-briefcase" aria-hidden="true"></i></span
+                    >{{j.experience_level}}
+                  </li>
+                  <li>
+                    <span><i class="fa fa-money" aria-hidden="true"></i></span
+                    >{{j.salary_information}}
+                  </li>
+                  <li>
+                    <span><i class="fa fa-calendar" aria-hidden="true"></i></span
+                    >Deadline : {{j.end_date}}
+                  </li>
+                </ul>
+                <div class="time">
+                  <a style="cursor: pointer;"><span>{{j.job_category}}</span></a>
+                  <span class="pull-right">{{j.required_people}}  Posts</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="check_role == 'Seeker'">
+          <div class="col-md-6 col-lg-3" *ngFor="let j2 of jobs_2">
+            <div class="job-item">
+              <div class="item-overlay">
+                <div class="job-info">
+                  <a class="btn btn-primary">{{j2.job_category}}</a>
+                  <span class="tr-title">
+                    <a>{{j2.job_tittle}}r</a>
+                    <span><a>{{j2.job_tittle}}</a></span>
+                  </span>
+                  <ul class="tr-list job-meta">
+                    <li>
+                      <i class="fa fa-map-signs" aria-hidden="true"></i>
+                      {{j2.country}}, {{j2.state}}
+                    </li>
+                    <li>
+                      <i class="fa fa-briefcase" aria-hidden="true"></i>{{j2.experience_level}}
+                    </li>
+                    <li>
+                      <i class="fa fa-money" aria-hidden="true"></i>{{j2.salary_information}}
+                    </li>
+                    <li>
+                      <span><i class="fa fa-calendar" aria-hidden="true"></i></span
+                      >Deadline : {{j2.end_date}}
+                    </li>
+                  </ul>
+                  <ul class="job-social tr-list">
+                    <li>
+                      <a (click)="goToDetails(j2.job_post_id)"
+                        ><i
+                          class="fa fa-long-arrow-right"
+                          aria-hidden="true"
+                        ></i
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="job-info">
+                <div class="company-logo">
+                  <img src="../../../assets/images/job/1.png" alt="images" class="img-fluid" />
+                </div>
+                <span class="tr-title">
+                  <a>{{j2.job_tittle}}</a>
+                  <span><a>{{j2.job_type}}</a></span>
+                </span>
+                <ul class="tr-list job-meta">
+                  <li>
+                    <span
+                      ><i class="fa fa-map-signs" aria-hidden="true"></i></span
+                    >{{j2.country}}, {{j2.state}}, {{j2.city}}
+                  </li>
+                  <li>
+                    <span
+                      ><i class="fa fa-briefcase" aria-hidden="true"></i></span
+                    >{{j2.experience_level}}
+                  </li>
+                  <li>
+                    <span><i class="fa fa-money" aria-hidden="true"></i></span
+                    >{{j2.salary_information}}
+                  </li>
+                  <li>
+                    <span><i class="fa fa-calendar" aria-hidden="true"></i></span
+                    >Deadline : {{j2.end_date}}
+                  </li>
+                </ul>
+                <div class="time">
+                  <a><span>{{j2.job_category}}</span></a>
+                  <span class="pull-right">{{j2.required_people}}  Posts</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

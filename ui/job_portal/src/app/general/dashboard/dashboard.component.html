@@ -1,0 +1,209 @@
+
+<!-- navbar -->
+  <app-nav-bar></app-nav-bar>
+<!-- nav_bar -->
+
+<div class="tr-users section-before bg-image">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="job-find">
+                    <div class="icon">
+                        <img src="assets/images/others/man.png" alt="Icon" class="img-fluid">
+                    </div>
+                    <h1>Find a Job</h1>
+                    <span *ngIf="count_applicants">{{count_applicants}} Skilld People</span>
+                    <a routerLink="../../job_portal/job_search" class="btn btn-primary">Search Jobs</a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="for-employers">
+                    <div class="icon">
+                        <img src="assets/images/others/briefcase.png" alt="Icon" class="img-fluid">
+                    </div>
+                    <h1>For Employers</h1>
+                    <span *ngIf="count_applicants">{{count_applicants}} Skilld People</span>
+                    <a (click)="check_login()" class="btn btn-primary">Post a Job</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tr-job-posted section-padding">
+    <div class="container">
+        <div class="section-title">
+            <h1>Jobs you may be interested in</h1>
+        </div>
+        <div class="job-tab text-center">
+            <ul class="nav nav-tabs justify-content-center" role="tablist">
+                <li role="presentation" class="active"><a href="#hot-jobs" aria-controls="hot-jobs" role="tab"
+                        data-toggle="tab">Hot Jobs</a></li>
+            </ul>
+            <div class="tab-content text-left">
+                <div role="tabpanel" class="tab-pane fade in show active" id="hot-jobs">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3" *ngFor="let j of jobs">
+                            <div class="job-item">
+                              <div class="item-overlay">
+                                <div class="job-info">
+                                  <a class="btn btn-primary">{{j.job_category}}</a>
+                                  <span class="tr-title">
+                                    <a>{{j.job_tittle}}r</a>
+                                    <span><a>{{j.company_name}}</a></span>
+                                  </span>
+                                  <ul class="tr-list job-meta">
+                                    <li>
+                                      <i class="fa fa-map-signs" aria-hidden="true"></i>
+                                      {{j.country}}, {{j.state}}
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-briefcase" aria-hidden="true"></i>{{j.experience_level}}
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-money" aria-hidden="true"></i>{{j.salary_information}}
+                                    </li>
+                                    <li>
+                                      <span><i class="fa fa-calendar" aria-hidden="true"></i></span
+                                      >Deadline : {{j.end_date}}
+                                    </li>
+                                  </ul>
+                                  <ul class="job-social tr-list">
+                                    <li>
+                                      <a (click)="goToDetails(j.job_post_id)"
+                                        ><i
+                                          class="fa fa-long-arrow-right"
+                                          aria-hidden="true"
+                                        ></i
+                                      ></a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="job-info">
+                                <div class="company-logo">
+                                  <img src="../../../assets/images/job/1.png" alt="images" class="img-fluid" />
+                                </div>
+                                <span class="tr-title">
+                                  <a>{{j.job_tittle}}</a>
+                                  <span><a>{{j.job_type}}</a></span>
+                                </span>
+                                <ul class="tr-list job-meta">
+                                  <li>
+                                    <span
+                                      ><i class="fa fa-map-signs" aria-hidden="true"></i></span
+                                    >{{j.country}}, {{j.state}}, {{j.city}}
+                                  </li>
+                                  <li>
+                                    <span
+                                      ><i class="fa fa-briefcase" aria-hidden="true"></i></span
+                                    >{{j.experience_level}}
+                                  </li>
+                                  <li>
+                                    <span><i class="fa fa-money" aria-hidden="true"></i></span
+                                    >{{j.salary_information}}
+                                  </li>
+                                  <li>
+                                    <span><i class="fa fa-calendar" aria-hidden="true"></i></span
+                                    >Deadline : {{j.end_date}}
+                                  </li>
+                                  <li>
+                                    <span>Posted by :</span
+                                    >{{j.company_name}}
+                                  </li>
+                                </ul>
+                                <div class="time">
+                                  <a><span>{{j.job_category}}</span></a>
+                                  <span class="pull-right">{{j.required_people}}  Posts</span>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tr-fun-fact section-padding" *ngIf="!login_check">
+    <div class="container">
+        <div class="fun-fact-content">
+            <div class="row text-center">
+                <div class="col-sm-4">
+                    <div class="fun-fact">
+                        <img src="assets/images/icons/fun-fact-color1.png" alt="assets/images" class="img-fluid">
+                        <h1 class="counter" *ngIf="count_live_jobs">{{count_live_jobs}}</h1>
+                        <span>Live Jobs</span>
+                        <p>Total live jobs available right now</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="fun-fact">
+                        <img src="assets/images/icons/fun-fact-color2.png" alt="assets/images" class="img-fluid">
+                        <h1 class="counter" *ngIf="count_company">{{count_company}}</h1>
+                        <span>Total Company</span>
+                        <p>Total companies for job posting</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="fun-fact">
+                        <img src="assets/images/icons/fun-fact-color3.png" alt="assets/images" class="img-fluid">
+                        <h1 class="counter" *ngIf="count_applicants">{{count_applicants}}</h1>
+                        <span>Total Candidate</span>
+                        <p>Total applicants apply for jobs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tr-steps bg-image section-padding section-before" *ngIf="!login_check">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="step">
+          <div class="step-image">
+            <img src="../../../assets/images/icons/step1.png" alt="images" class="img-fluid" />
+          </div>
+          <h1>01 Steps</h1>
+          <h2>Register an account</h2>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry.
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="step">
+          <div class="step-image">
+            <img src="../../../assets/images/icons/step2.png" alt="images" class="img-fluid" />
+          </div>
+          <h1>02 Steps</h1>
+          <h2>search your desired job</h2>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry.
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="step">
+          <div class="step-image">
+            <img src="../../../assets/images/icons/step3.png" alt="images" class="img-fluid" />
+          </div>
+          <h1>03 Steps</h1>
+          <h2>Send your resume to employers</h2>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+  <app-footer></app-footer>
+<!-- footer -->

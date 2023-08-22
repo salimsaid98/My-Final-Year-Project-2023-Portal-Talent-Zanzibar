@@ -1,0 +1,224 @@
+<!-- navbar -->
+<app-nav-bar></app-nav-bar>
+<!-- nav_bar -->
+
+<div class="tr-profile section-padding">
+  <div class="" style="margin-left:5%;margin-right:4%;">
+    <div class="row">
+      <div class="col-md-4">
+        <h1 *ngIf="user_role">{{ user_role }}</h1>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-lg-3">
+        <div class="tr-sidebar">
+          <ul class="nav nav-tabs profile-tabs section" role="tablist">
+            <li role="presentation">
+              <a
+                style="cursor: pointer"
+                (click)="gotoAdminHomePage()"
+                aria-controls="account-info"
+                role="tab"
+                data-toggle="tab"
+                ><i class="fa fa-life-ring" aria-hidden="true"></i> Home Page</a
+              >
+            </li>
+            <li role="presentation">
+              <a
+                (click)="goToSpecializationPage()"
+                style="cursor: pointer"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i
+                    class="fa fa-pencil-square-o"
+                    aria-hidden="true"
+                  ></i></span
+                >Specialization Configurations</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a class="active"
+                (click)="goToSkillsPage()"
+                style="cursor: pointer"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i
+                    class="fa fa-pencil-square-o"
+                    aria-hidden="true"
+                  ></i></span
+                >Skills Configurations</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a
+                (click)="goToJobTypes()"
+
+                style="cursor: pointer"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i
+                    class="fa fa-pencil-square-o"
+                    aria-hidden="true"
+                  ></i></span
+                >Job Type Configurations</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a (click)="goToCompanies()"
+              style="cursor: pointer;"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Companies</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a (click)="gotoSeekers()"
+              style="cursor: pointer;"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Seekers</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a (click)="gotoJobList()"
+              style="cursor: pointer;"
+                aria-controls="edit-resume"
+                role="tab"
+                data-toggle="tab"
+                ><span
+                  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+                ></span>Job List</a
+              >
+            </li>
+
+            <li role="presentation">
+              <a
+                style="cursor: pointer"
+                (click)="goToUserManagement()"
+                aria-controls="archived"
+                role="tab"
+                data-toggle="tab"
+                ><span><i class="fa fa-clone" aria-hidden="true"></i></span>
+                User Management</a
+              >
+            </li>
+            <li role="presentation">
+              <a
+                (click)="log_out()"
+                style="cursor: pointer"
+                aria-controls="close-account"
+                role="tab"
+                data-toggle="tab"
+                ><span><i class="fa fa-scissors" aria-hidden="true"></i></span>
+                Log Out</a
+              >
+            </li>
+          </ul>
+          >
+        </div>
+      </div>
+      <div class="col-md-8 col-lg-9">
+        <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+        <div class="tab-content">
+          <div
+            role="tabpanel"
+            class="tab-pane fade in show active account-info"
+            id="account-info"
+          >
+            <div class="section display-information">
+              <div class="title title-after">
+                <div class="icon">
+                  <img
+                    src="../../assets/images/icons/2.png"
+                    alt="Icon"
+                    class="img-fluid"
+                  />
+                </div>
+                <span>Skills Information</span>
+              </div>
+
+              <form class="tr-form">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="">Type Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Skill Name"
+                        name="job_type"
+                        [(ngModel)]="skill_name"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" *ngIf="!check_edit" class="btn btn-primary" (click)="saveSkill()" [disabled]="!skill_name">Save</button>
+                <button type="submit" *ngIf="check_edit" class="btn btn-primary" (click)="modifySkill()" [disabled]="!skill_name">Modify</button>
+              </form>
+
+              <br>
+
+              <div class="card-body">
+                <h5 class="card-title">List of Skills</h5>
+                <div class="mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource">
+
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> No. </th>
+                      <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="skill_name">
+                      <th mat-header-cell *matHeaderCellDef>Skill Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.skill_name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                      <th mat-header-cell *matHeaderCellDef> Action </th>
+                      <td mat-cell *matCellDef="let element">
+                        <button title="Edit Skill" type="button" class="btn-success btn-xs" (click)="editSkill(element)"><i class="fa fa-edit"></i></button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+
+                  <mat-paginator [pageSizeOptions]="[3,6,9,12,15]"
+                                 showFirstLastButtons
+                                 aria-label="Select page of periodic elements">
+                  </mat-paginator>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<app-footer></app-footer>
+<!-- footer -->
