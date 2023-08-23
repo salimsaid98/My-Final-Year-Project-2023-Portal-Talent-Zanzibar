@@ -52,7 +52,7 @@ public class LoginServices
     }
 
     public login saveUsers(loginDTO lgn){
-        final String secretKey = "hasuko52@gmail.com";
+        final String secretKey = "saidhadimu@gmail.com";
         login l = new login();
         l.setPassword(encrypt(lgn.getPassword(),secretKey));
         l.setUsername(lgn.getUsername()); l.setStatus("1");
@@ -66,7 +66,7 @@ public class LoginServices
     }
 
     public login login_authentication(String username, String password){
-        final String secretKey = "hasuko52@gmail.com";
+        final String secretKey = "saidhadimu@gmail.com";
         String encrypted_password = encrypt(password,secretKey);
         String status = "1";
         Optional<login> l = login_repository.login_authentication(username,encrypted_password,status);
@@ -88,7 +88,7 @@ public class LoginServices
     @Transactional
     public Optional<login> resetPassword(int user_id,loginDTO dto){
         return login_repository.findById(user_id).map(l->{
-            final String secretKey = "hasuko52@gmail.com";
+            final String secretKey = "saidhadimu@gmail.com";
             l.setPassword(encrypt(dto.getPassword(),secretKey));
             l.setRole(dto.getRole());
             l.setStatus("1");
